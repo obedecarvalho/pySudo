@@ -7,9 +7,9 @@ from calcularPossibilidadeCasa import CalcularPossibilidadeCasa
 from possibilidadeUnica import PossibilidadeUnica
 from controleTabuleiro import ControleTabuleiro
 from visualizador import Visualizador
-from casaUnicaLinha import CasaUnicaLinha
-from casaUnicaColuna import CasaUnicaColuna
-from casaUnicaSubtabela import CasaUnicaSubtabela
+from casaUnica import CasaUnicaLinha
+from casaUnica import CasaUnicaColuna
+from casaUnica import CasaUnicaSubtabela
 
 class Simulador():
 	def __init__(self):
@@ -54,6 +54,20 @@ class Simulador():
 		algoritmoCasaUnica = CasaUnicaLinha()
 		algoritmoCasaUnica.resolverAlgCasaUnicaLinha(tabuleiro)
 		return
+		
+	def __resolverAlgCasaUnica(self, tabuleiro = TabuleiroCasaUnica()):
+		algoritmoCasaUnicaLinha = CasaUnicaLinha()
+		algoritmoCasaUnicaSubtabela = CasaUnicaSubtabela()
+		algoritmoCasaUnicaColuna = CasaUnicaColuna()
+		alteracao = True
+		while alteracao:
+			alteracao = False
+			umaAlteracao = algoritmoCasaUnicaLinha.resolverAlgCasaUnicaLinha(tabuleiro)
+			alteracao = alteracao or umaAlteracao
+			umaAlteracao = algoritmoCasaUnicaColuna.resolverAlgCasaUnicaColuna(tabuleiro)
+			alteracao = umaAlteracao or alteracao
+			algoritmoCasaUnicaSubtabela.resolverAlgCasaUnicaSubtabela(tabuleiro)
+			alteracao = umaAlteracao or alteracao
 				
 	def run (self, tabuleiro = Tabuleiro()):
 		vizu = Visualizador()
@@ -63,7 +77,27 @@ class Simulador():
 		vizu.mostrarTabela(tabuleiro)#
 		return tabuleiro.salvarString()
 		
+	def run5 (self, tabuleiro = TabuleiroCasaUnica()):
+		print '-'*50
+		vizu = Visualizador()
+		vizu.mostrarTabela(tabuleiro)#
+		self.__calcularPossibilidades(tabuleiro)
+		self.__calcularPossibilidadesLinha(tabuleiro)
+		self.__calcularPossibilidadesColuna(tabuleiro)
+		self.__calcularPossibilidadesSubtabela(tabuleiro)
+		vizu.mostrarPossibilidadesLinha(tabuleiro)#
+		vizu.mostrarPossibilidadesColuna(tabuleiro)#
+		vizu.mostrarPossibilidadesSubtabela(tabuleiro)#
+		self.__resolverAlgCasaUnica(tabuleiro)
+		vizu.mostrarTabela(tabuleiro)#
+		vizu.mostrarPossibilidadesLinha(tabuleiro)#
+		vizu.mostrarPossibilidadesColuna(tabuleiro)#
+		vizu.mostrarPossibilidadesSubtabela(tabuleiro)#
+		return tabuleiro.salvarString()
+		
+	
 	def run2 (self, tabuleiro = TabuleiroCasaUnica()):
+		print '-'*50
 		vizu = Visualizador()
 		vizu.mostrarTabela(tabuleiro)#
 		self.__calcularPossibilidades(tabuleiro)
@@ -96,26 +130,5 @@ class Simulador():
 		vizu.mostrarPossibilidadesSubtabela(tabuleiro)#
 		return tabuleiro.salvarString()
 			
-	'''
-	def run2(self):
-		self.__calcularPossibilidadesTodos()
-		self.__controlador.mostrarTabela(self.__tabuleiros[0])
-		self.__controlador.mostrarPossibilidades(self.__tabuleiros[0])
-		c = ExtencaoControlador()
-		c.calcularPossibilidades(self.__tabuleiros[0])
-		c.resolverPossibilidades(self.__tabuleiros[0])
-		self.__controlador.mostrarTabela(self.__tabuleiros[0])
-		
-		if len(self.__tabuleiros) > 0:
-			self.__controlador.mostrarTabela(self.__tabuleiros[0])
-			if self.__controlador.tabelaValida(self.__tabuleiros[0]):
-				return self.__tabuleiros[0].salvarString()
-			else:
-				return '0x00 - error'
-		else:
-			return '0x00 - error'
-		
-	'''
-
 if __name__ == "__main__":
 	print ("Classe Simulador: Define o simulador do sudoku")
