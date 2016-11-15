@@ -61,12 +61,12 @@ class CasaUnicaLinha(CasaUnica):
 			if valorPos in casa.getPossibilidades():
 				casa.setValor(valorPos)
 				self.atualizarLinha(linha, coluna, tabuleiro)
-				casa.setPossibilidades([])
 				self.atualizarLinhaTabela(linha, coluna, valorPos, tabuleiro)
 				colunaCasaUnica.atualizarColuna(linha, coluna, tabuleiro)
-				colunaCasaUnica.atualizarColunaTabela(linha, coluna, tabuleiro)
+				colunaCasaUnica.atualizarColunaTabela(linha, coluna, valorPos, tabuleiro)
 				subtabelaCasaUnica.atualizarSubtabela(linha, coluna, tabuleiro)
-				subtabelaCasaUnica.atualizarSubtabelaTabela(linha, coluna, tabuleiro)
+				subtabelaCasaUnica.atualizarSubtabelaTabela(linha, coluna, valorPos, tabuleiro)
+				casa.setPossibilidades([])
 				break
 				
 	def atualizarLinha(self, linha, coluna, tabuleiro = TabuleiroCasaUnica()):
@@ -132,12 +132,12 @@ class CasaUnicaColuna(CasaUnica):
 			if valorPos in casa.getPossibilidades():
 				casa.setValor(valorPos)
 				self.atualizarColuna(linha, coluna, tabuleiro)
-				casa.setPossibilidades([])
 				self.atualizarColunaTabela(linha, coluna, valorPos, tabuleiro)
 				linhaCasaUnica.atualizarLinha(linha, coluna, tabuleiro)
-				linhaCasaUnica.atualizarLinhaTabela(linha, coluna, tabuleiro)
+				linhaCasaUnica.atualizarLinhaTabela(linha, coluna, valorPos, tabuleiro)
 				subtabelaCasaUnica.atualizarSubtabela(linha, coluna, tabuleiro)
-				subtabelaCasaUnica.atualizarSubtabelaTabela(linha, coluna, tabuleiro)
+				subtabelaCasaUnica.atualizarSubtabelaTabela(linha, coluna, valorPos,tabuleiro)
+				casa.setPossibilidades([])
 				break
 				
 	def atualizarColuna(self, linha, coluna, tabuleiro = TabuleiroCasaUnica()):
@@ -210,12 +210,12 @@ class CasaUnicaSubtabela(CasaUnica):
 				if valorPos in casa.getPossibilidades():
 					casa.setValor(valorPos)
 					self.atualizarSubtabela(linha, coluna, tabuleiro)
-					casa.setPossibilidades([])
 					self.atualizarSubtabelaTabela(linha, coluna, valorPos, tabuleiro)
 					linhaCasaUnica.atualizarLinha(linha, coluna, tabuleiro)
-					linhaCasaUnica.atualizarLinhaTabela(linha, coluna, tabuleiro)
+					linhaCasaUnica.atualizarLinhaTabela(linha, coluna,valorPos, tabuleiro)
 					colunaCasaUnica.atualizarColuna(linha, coluna, tabuleiro)
-					colunaCasaUnica.atualizarColunaTabela(linha, coluna, tabuleiro)
+					colunaCasaUnica.atualizarColunaTabela(linha, coluna,valorPos, tabuleiro)
+					casa.setPossibilidades([])
 					break
 				
 	def atualizarSubtabela(self, linha, coluna, tabuleiro = TabuleiroCasaUnica()):
