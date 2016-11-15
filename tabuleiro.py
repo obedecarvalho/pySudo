@@ -28,8 +28,7 @@ class Tabuleiro():
 			for i in range(len(novaTabela)):
 				valido = valido and self.__tabela[i//9][i%9].setValor(novaTabela[i])
 				if novaTabela[i] != '0':
-					self.__tabela[i//9][i%9].setImutavel()
-				
+					self.__tabela[i//9][i%9].setImutavel()				
 		else:
 			return False
 		if valido:

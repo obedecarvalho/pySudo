@@ -85,22 +85,5 @@ class ControleTabuleiro():
 				return False
 		return valida
 
-	def mostrarTabela(self, tabuleiro = Tabuleiro()):
-		print ('\n')
-		sudoku = tabuleiro.salvarString()
-		linhas = []
-		for i in range(9):
-			linhas.append(sudoku[i*9:i*9+9])
-		sep = '|'
-		for lin in linhas:
-			print (sep.join(lin))
-
-	def mostrarPossibilidades(self, tabuleiro = Tabuleiro()):
-		tabela = tabuleiro.getTabela()
-		for linha in range(9):
-			for coluna in range(9):
-				casa = tabela[linha][coluna]
-				print (linha, coluna, casa.getPossibilidades())
-
 if __name__ == "__main__":
 	print ("Classe ControleTabuleiro:  Define o controle do tabuleiro do sudoku")

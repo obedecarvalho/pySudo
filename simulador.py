@@ -1,16 +1,15 @@
 #!/usr/bin/python2
 # -*- coding: utf-8 -*-
 
-
 from tabuleiro import Tabuleiro
+from tabuleiroCasaUnica import TabuleiroCasaUnica
 from calcularPossibilidadeCasa import CalcularPossibilidadeCasa
 from possibilidadeUnica import PossibilidadeUnica
 from controleTabuleiro import ControleTabuleiro
-
-#from casa import Casa
-#from algoritmoResolucao import AlgoritmoResolucao
-#from extencaoControlador import ExtencaoControlador
-#from controleTabuleiro import ControleTabuleiro
+from visualizador import Visualizador
+from casaUnicaLinha import CasaUnicaLinha
+from casaUnicaColuna import CasaUnicaColuna
+from casaUnicaSubtabela import CasaUnicaSubtabela
 
 class Simulador():
 	def __init__(self):
@@ -25,13 +24,76 @@ class Simulador():
 		algPossibilidadeUnica = PossibilidadeUnica()
 		algPossibilidadeUnica.resolverPossibilidadeUnica(tabuleiro)
 		return
+		
+	def __calcularPossibilidadesColuna(self, tabuleiro = TabuleiroCasaUnica()):
+		algoritmoCasaUnica = CasaUnicaColuna()
+		algoritmoCasaUnica.calcularPossibilidadesColuna(tabuleiro)
+		return
+		
+	def __resolverAlgCasaUnicaColuna(self, tabuleiro = TabuleiroCasaUnica()):
+		algoritmoCasaUnica = CasaUnicaColuna()
+		algoritmoCasaUnica.resolverAlgCasaUnicaColuna(tabuleiro)
+		return
+	
+	def __calcularPossibilidadesSubtabela(self, tabuleiro = TabuleiroCasaUnica()):
+		algoritmoCasaUnica = CasaUnicaSubtabela()
+		algoritmoCasaUnica.calcularPossibilidadesSubtabela(tabuleiro)
+		return
+		
+	def __resolverAlgCasaUnicaSubtabela(self, tabuleiro = TabuleiroCasaUnica()):
+		algoritmoCasaUnica = CasaUnicaSubtabela()
+		algoritmoCasaUnica.resolverAlgCasaUnicaSubtabela(tabuleiro)
+		return
+		
+	def __calcularPossibilidadesLinha(self, tabuleiro = TabuleiroCasaUnica()):
+		algoritmoCasaUnica = CasaUnicaLinha()
+		algoritmoCasaUnica.calcularPossibilidadesLinha(tabuleiro)
+		return
+		
+	def __resolverAlgCasaUnicaLinha(self, tabuleiro = TabuleiroCasaUnica()):
+		algoritmoCasaUnica = CasaUnicaLinha()
+		algoritmoCasaUnica.resolverAlgCasaUnicaLinha(tabuleiro)
+		return
 				
 	def run (self, tabuleiro = Tabuleiro()):
-		controlador = ControleTabuleiro()
+		vizu = Visualizador()
 		self.__calcularPossibilidades(tabuleiro)
-		controlador.mostrarPossibilidades(tabuleiro)#
+		vizu.mostrarPossibilidades(tabuleiro)#
 		self.__resolverAlgPossibilidadeUnica(tabuleiro)
-		controlador.mostrarTabela(tabuleiro)#
+		vizu.mostrarTabela(tabuleiro)#
+		return tabuleiro.salvarString()
+		
+	def run2 (self, tabuleiro = TabuleiroCasaUnica()):
+		vizu = Visualizador()
+		vizu.mostrarTabela(tabuleiro)#
+		self.__calcularPossibilidades(tabuleiro)
+		self.__calcularPossibilidadesLinha(tabuleiro)
+		vizu.mostrarPossibilidadesLinha(tabuleiro)#
+		self.__resolverAlgCasaUnicaLinha(tabuleiro)
+		vizu.mostrarTabela(tabuleiro)#
+		vizu.mostrarPossibilidadesLinha(tabuleiro)#
+		return tabuleiro.salvarString()
+		
+	def run3 (self, tabuleiro = TabuleiroCasaUnica()):
+		vizu = Visualizador()
+		vizu.mostrarTabela(tabuleiro)#
+		self.__calcularPossibilidades(tabuleiro)
+		self.__calcularPossibilidadesColuna(tabuleiro)
+		vizu.mostrarPossibilidadesColuna(tabuleiro)#
+		self.__resolverAlgCasaUnicaColuna(tabuleiro)
+		vizu.mostrarTabela(tabuleiro)#
+		vizu.mostrarPossibilidadesColuna(tabuleiro)#
+		return tabuleiro.salvarString()
+		
+	def run4 (self, tabuleiro = TabuleiroCasaUnica()):
+		vizu = Visualizador()
+		vizu.mostrarTabela(tabuleiro)#
+		self.__calcularPossibilidades(tabuleiro)
+		self.__calcularPossibilidadesSubtabela(tabuleiro)
+		vizu.mostrarPossibilidadesSubtabela(tabuleiro)#
+		self.__resolverAlgCasaUnicaSubtabela(tabuleiro)
+		vizu.mostrarTabela(tabuleiro)#
+		vizu.mostrarPossibilidadesSubtabela(tabuleiro)#
 		return tabuleiro.salvarString()
 			
 	'''
