@@ -8,7 +8,7 @@ from entradaSaida import SudokuBD
 from simulador import Simulador
 
 if __name__ == '__main__':
-	'''
+	#'''
 	dados = SudokuBD('teste/entrada.txt', 'teste/saida.txt')
 	jogo = dados.proximo()
 	while jogo:
@@ -16,13 +16,23 @@ if __name__ == '__main__':
 		tabuleiro = TabuleiroCasaUnica()
 		tabuleiro.setTabela(jogo[1:82])
 		simulador = Simulador()
-		dados.salvar(simulador.run(tabuleiro))
+		tabuleiro2 = TabuleiroCasaUnica()
+		tabuleiro2.setTabela(simulador.run5(tabuleiro))
+		dados.salvar(simulador.run(tabuleiro2))
 		jogo = dados.proximo()
 	dados.fechar()
 	'''
-	jogo = '070000810000318902281470005400060000690103027000090006900054681106982000057000040'
+	jogo = 	'060091080'\
+			'109680405'\
+			'050040106'\
+			'600000200'\
+			'023904710'\
+			'004000003'\
+			'907020030'\
+			'305079602'\
+			'040150070'
 	tabuleiro = TabuleiroCasaUnica()
 	tabuleiro.setTabela(jogo)
 	simulador = Simulador()
-	simulador.run4(tabuleiro)
-	#'''
+	simulador.run5(tabuleiro)
+	'''

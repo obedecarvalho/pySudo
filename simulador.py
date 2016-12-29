@@ -102,6 +102,8 @@ class Simulador():
 		vizu.mostrarTabela(tabuleiro)#
 		self.__calcularPossibilidades(tabuleiro)
 		self.__calcularPossibilidadesLinha(tabuleiro)
+		self.__calcularPossibilidadesColuna(tabuleiro)#
+		self.__calcularPossibilidadesSubtabela(tabuleiro)#
 		vizu.mostrarPossibilidadesLinha(tabuleiro)#
 		self.__resolverAlgCasaUnicaLinha(tabuleiro)
 		vizu.mostrarTabela(tabuleiro)#
@@ -112,7 +114,9 @@ class Simulador():
 		vizu = Visualizador()
 		vizu.mostrarTabela(tabuleiro)#
 		self.__calcularPossibilidades(tabuleiro)
+		self.__calcularPossibilidadesLinha(tabuleiro)#
 		self.__calcularPossibilidadesColuna(tabuleiro)
+		self.__calcularPossibilidadesSubtabela(tabuleiro)#
 		vizu.mostrarPossibilidadesColuna(tabuleiro)#
 		self.__resolverAlgCasaUnicaColuna(tabuleiro)
 		vizu.mostrarTabela(tabuleiro)#
@@ -123,6 +127,8 @@ class Simulador():
 		vizu = Visualizador()
 		vizu.mostrarTabela(tabuleiro)#
 		self.__calcularPossibilidades(tabuleiro)
+		self.__calcularPossibilidadesLinha(tabuleiro)#
+		self.__calcularPossibilidadesColuna(tabuleiro)#
 		self.__calcularPossibilidadesSubtabela(tabuleiro)
 		vizu.mostrarPossibilidadesSubtabela(tabuleiro)#
 		self.__resolverAlgCasaUnicaSubtabela(tabuleiro)

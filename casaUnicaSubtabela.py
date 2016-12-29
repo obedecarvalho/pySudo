@@ -1,6 +1,8 @@
 #!/usr/bin/python2
 # -*- coding: utf-8 -*-
 
+#from casaUnicaLinha import CasaUnicaLinha
+#from casaUnicaColuna import CasaUnicaColuna
 from casaUnica import CasaUnica
 from tabuleiroCasaUnica import TabuleiroCasaUnica
 from controleTabuleiro import ControleTabuleiro
@@ -30,22 +32,29 @@ class CasaUnicaSubtabela(CasaUnica):
 
 	def resolverAlgCasaUnicaSubtabela(self, tabuleiro = TabuleiroCasaUnica()):
 		alteracao = True
+		umAlteracao = False
 		while alteracao:
 			alteracao = False
 			for subtabela in range(9):
 				alteracao = alteracao or self.__resolverAlgCasaUnicaSubtabelaN(subtabela, tabuleiro)
+			if alteracao:
+				umAlteracao = True
+		return umAlteracao
 				
 	def __resolverAlgCasaUnicaSubtabelaN(self, subtabela, tabuleiro = TabuleiroCasaUnica()):
 		alteracao = False
 		subtabelaPossibilidades = tabuleiro.getPossibilidadesSubtabela()[subtabela]
 		for valorPos, qtde in subtabelaPossibilidades.items():
 			if qtde == 1:
+				print subtabela, valorPos#
 				alteracao = True
 				self.__setValorSubtabela(valorPos, subtabela, tabuleiro)
 				del subtabelaPossibilidades[valorPos]
 		return alteracao
 				
 	def __setValorSubtabela(self, valorPos, subtabela, tabuleiro = TabuleiroCasaUnica()):
+		linhaCasaUnica = CasaUnicaLinha()
+		colunaCasaUnica = CasaUnicaColuna()
 		tabela = tabuleiro.getTabela()
 		ctrlTabuleiro = ControleTabuleiro()
 		inicioLinha, inicioColuna = ctrlTabuleiro.subtabelaToLinhaColuna(subtabela)
@@ -54,12 +63,16 @@ class CasaUnicaSubtabela(CasaUnica):
 				casa = tabela[linha][coluna]
 				if valorPos in casa.getPossibilidades():
 					casa.setValor(valorPos)
-					self.__atualizarSubtabela(linha, coluna, tabuleiro)
+					self.atualizarSubtabela(linha, coluna, tabuleiro)
 					casa.setPossibilidades([])
-					self.__atualizarSubtabelaTabela(linha, coluna, valorPos, tabuleiro)
+					self.atualizarSubtabelaTabela(linha, coluna, valorPos, tabuleiro)
+					linhaCasaUnica.atualizarLinha(linha, coluna, tabuleiro)
+					linhaCasaUnica.atualizarLinhaTabela(linha, coluna, tabuleiro)
+					colunaCasaUnica.atualizarColuna(linha, coluna, tabuleiro)
+					colunaCasaUnica.atualizarColunaTabela(linha, coluna, tabuleiro)
 					break
 				
-	def __atualizarSubtabela(self, linha, coluna, tabuleiro = TabuleiroCasaUnica()):
+	def atualizarSubtabela(self, linha, coluna, tabuleiro = TabuleiroCasaUnica()):
 		ctrlTabuleiro = ControleTabuleiro()
 		subtabela = ctrlTabuleiro.calcularSubtabela(linha, coluna)
 		subtabelaPossibilidades = tabuleiro.getPossibilidadesSubtabela()[subtabela]
@@ -67,7 +80,7 @@ class CasaUnicaSubtabela(CasaUnica):
 		for valorPos in casa.getPossibilidades():
 			subtabelaPossibilidades[valorPos] -= 1
 	
-	def __atualizarSubtabelaTabela(self, linha, coluna, valorPos, tabuleiro = TabuleiroCasaUnica()):
+	def atualizarSubtabelaTabela(self, linha, coluna, valorPos, tabuleiro = TabuleiroCasaUnica()):
 		tabela = tabuleiro.getTabela()
 		ctrlTabuleiro = ControleTabuleiro()
 		subtabela = ctrlTabuleiro.calcularSubtabela(linha, coluna)
